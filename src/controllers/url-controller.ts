@@ -8,11 +8,10 @@ export const decodeUrlController = (req: Request, res: Response) => {
 export const encodeUrlController = async (req: Request, res: Response) => {
     try {
         const codeGenerated = encodeUrlService();
-        return res.status(200).send()
+       res.status(200).send(codeGenerated);
     } catch (e) {
-        return res.status(500).send()
+       res.status(500).send()
     }
-
 }
 export const listUrlController = (req: Request, res: Response) => {
     console.log("List of urls in the controller")

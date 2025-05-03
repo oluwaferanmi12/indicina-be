@@ -5,7 +5,7 @@ export const decodeUrlService = () => {
 }
 
 export const encodeUrlService = () => {
-    return nanoid(10)
+    return nanoid(6)
 
 }
 
