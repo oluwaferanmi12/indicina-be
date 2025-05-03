@@ -7,13 +7,15 @@
     "build": "tsc --build",
     "start": "node ./dist/server.js",
     "start:dev": "nodemon ./src/server.ts"
-    
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "ts-jest": "^29.3.2"
   },
