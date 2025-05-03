@@ -11,4 +11,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api/", url_route_1.default);
+app.get("/:short_code", (req, res) => {
+    res.redirect("https://google.com");
+});
 exports.default = app;

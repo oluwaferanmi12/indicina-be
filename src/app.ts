@@ -8,7 +8,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-app.use("/api/" , urlRoutes )
+
+
+app.use("/api" , urlRoutes )
+app.get("/:short_code", (req, res) => {
+    res.redirect("https://google.com");
+})
 
 
 export default app;
