@@ -1,14 +1,15 @@
 import { nanoid } from "nanoid"
 import { entriesDB } from "../db/entries-table"
 import moment from "moment";
+import { SHORT_CODE_LENGTH } from "../config/url-config";
 
 export const decodeUrlService = () => {
 
 }
 
 export const encodeUrlService = (url: string) => {
-    const generatedCode = nanoid(6);
-    const DEFAULT_BASE_URL = process.env.SHORT_URL_BASE_URL;
+    const generatedCode = nanoid(SHORT_CODE_LENGTH);
+    const DEFAULT_BASE_URL = process.env.BASE_URL;
     const newUrlObject = {
         originalUrl: url,
         visits: 0,

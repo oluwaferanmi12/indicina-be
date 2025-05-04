@@ -17,3 +17,7 @@ export interface ValidateUrlResponse {
     message: string;
     validated: boolean;
 }
+
+export interface RedirectUrlInterface{
+    short_code: string;
+}

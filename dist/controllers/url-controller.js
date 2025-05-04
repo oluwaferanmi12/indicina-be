@@ -20,7 +20,7 @@ const encodeUrlController = (req, res) => __awaiter(void 0, void 0, void 0, func
     try {
         // Do proper stripping off and validation for the url that is sent 
         const { url } = req.body;
-        const codeGenerated = (0, url_service_1.encodeUrlService)();
+        const codeGenerated = (0, url_service_1.encodeUrlService)(url);
         res.status(200).json(codeGenerated);
     }
     catch (e) {
