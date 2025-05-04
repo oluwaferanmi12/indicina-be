@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUrlController = exports.redirectUrlController = exports.statisticsUrlController = exports.listUrlController = exports.encodeUrlController = exports.decodeUrlController = void 0;
+exports.createUrlController = exports.redirectUrlController = exports.statisticsUrlController = exports.listUrlController = exports.handleRedirect = exports.encodeUrlController = exports.decodeUrlController = void 0;
 const url_service_1 = require("../services/url-service");
 const decodeUrlController = (req, res) => {
     console.log("Encode the url in the controller");
@@ -28,6 +28,14 @@ const encodeUrlController = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.encodeUrlController = encodeUrlController;
+const handleRedirect = (req, res) => {
+    var _a;
+    const { short_code } = req.params;
+    const short_code_object = (0, url_service_1.getOneUrl)(short_code);
+    (0, url_service_1.updateUrlVisit)(short_code);
+    return res.redirect((_a = short_code_object === null || short_code_object === void 0 ? void 0 : short_code_object.originalUrl) !== null && _a !== void 0 ? _a : "");
+};
+exports.handleRedirect = handleRedirect;
 const listUrlController = (req, res) => {
     console.log("List of urls in the controller");
 };

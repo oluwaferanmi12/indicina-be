@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const url_route_1 = __importDefault(require("./routes/url-route"));
 const cors_1 = __importDefault(require("cors"));
+const validateRedirecturl_1 = require("./middleware/validateRedirecturl");
+const url_controller_1 = require("./controllers/url-controller");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api", url_route_1.default);
-app.get("/:short_code", (req, res) => {
-    res.redirect("https://google.com");
-});
+app.get("/:short_code", validateRedirecturl_1.validateRedirectUrl, url_controller_1.handleRedirect);
 exports.default = app;

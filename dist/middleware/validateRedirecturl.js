@@ -1,8 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidateRedirectUrl = void 0;
-const ValidateRedirectUrl = (req, res, next) => {
+exports.validateRedirectUrl = void 0;
+const url_service_1 = require("../services/url-service");
+const validateRedirectUrl = (req, res, next) => {
     const { short_code } = req.params;
+    if (!short_code || !(0, url_service_1.getOneUrl)(short_code)) {
+        res.status(404).send({ message: "Url not found" });
+    }
     next();
 };
-exports.ValidateRedirectUrl = ValidateRedirectUrl;
+exports.validateRedirectUrl = validateRedirectUrl;

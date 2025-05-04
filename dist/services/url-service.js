@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.encodeUrlService = exports.decodeUrlService = void 0;
+exports.updateUrlVisit = exports.getOneUrl = exports.encodeUrlService = exports.decodeUrlService = void 0;
 const nanoid_1 = require("nanoid");
 const entries_table_1 = require("../db/entries-table");
 const moment_1 = __importDefault(require("moment"));
@@ -25,3 +25,14 @@ const encodeUrlService = (url) => {
     return newUrlObject;
 };
 exports.encodeUrlService = encodeUrlService;
+const getOneUrl = (short_code) => {
+    return entries_table_1.entriesDB.get(short_code);
+};
+exports.getOneUrl = getOneUrl;
+const updateUrlVisit = (short_code) => {
+    const urlDetail = (0, exports.getOneUrl)(short_code);
+    if (urlDetail) {
+        entries_table_1.entriesDB.set(short_code, Object.assign(Object.assign({}, urlDetail), { visits: urlDetail.visits + 1, updatedAt: moment_1.default.utc() }));
+    }
+};
+exports.updateUrlVisit = updateUrlVisit;
