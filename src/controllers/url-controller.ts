@@ -7,10 +7,13 @@ export const decodeUrlController = (req: Request, res: Response) => {
 }
 export const encodeUrlController = async (req: Request, res: Response) => {
     try {
+        console.log(req.body.url)
+        // Do proper stripping off and validation for the url that is sent 
+        
         const codeGenerated = encodeUrlService();
-       res.status(200).send(codeGenerated);
+        res.status(200).json(codeGenerated);
     } catch (e) {
-       res.status(500).send()
+        res.status(500).send()
     }
 }
 export const listUrlController = (req: Request, res: Response) => {
@@ -25,4 +28,7 @@ export const redirectUrlController = (req: Request, res: Response) => {
 export const createUrlController = (req: Request, res: Response) => {
     console.log("Create a new url in the controller")
 }
+
+
+// utility functions peculiar to the url service 
 
