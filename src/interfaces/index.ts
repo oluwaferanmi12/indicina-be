@@ -1,8 +1,10 @@
+import { Moment } from "moment";
+
 export interface UrlInterface {
     originalUrl: string;
     visits: number;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Moment;
+    updatedAt: Moment;
     short_url: string;
 
 }

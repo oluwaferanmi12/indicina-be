@@ -1,16 +1,16 @@
 import { Response, Request } from "express"
 import { encodeUrlService } from "../services/url-service"
+import { EncodeUrlInterface } from "../interfaces"
 
 export const decodeUrlController = (req: Request, res: Response) => {
     console.log("Encode the url in the controller")
     // return res.status(200)
 }
-export const encodeUrlController = async (req: Request, res: Response) => {
+export const encodeUrlController = async (req: Request<{}, {}, EncodeUrlInterface >, res: Response) => {
     try {
-        console.log(req.body.url)
         // Do proper stripping off and validation for the url that is sent 
-        
-        const codeGenerated = encodeUrlService();
+        const {url} = req.body
+        const codeGenerated = encodeUrlService(url);
         res.status(200).json(codeGenerated);
     } catch (e) {
         res.status(500).send()

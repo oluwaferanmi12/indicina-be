@@ -1,20 +1,22 @@
 import { nanoid } from "nanoid"
 import { entriesDB } from "../db/entries-table"
+import moment from "moment";
 
 export const decodeUrlService = () => {
 
 }
 
-export const encodeUrlService = () => {
+export const encodeUrlService = (url: string) => {
     const generatedCode = nanoid(6);
-    entriesDB.set(nanoid(6), {
-        originalUrl: "https://google.com/search?query=hello",
-        visits: 10,
-        createdAt: new Date("2024-05-19T08:30:00Z"),
-        short_url: "",
-        updatedAt: new Date("2024-05-19T08:30:00Z")
-    })
-    const generatedObject = { shortCode: generatedCode, visits: 10 }
-    return generatedObject
+    const DEFAULT_BASE_URL = process.env.SHORT_URL_BASE_URL;
+    const newUrlObject = {
+        originalUrl: url,
+        visits: 0,
+        createdAt: moment.utc(),
+        short_url: `${DEFAULT_BASE_URL+generatedCode}`,
+        updatedAt: moment.utc()
+    }
+    entriesDB.set(generatedCode, newUrlObject);
+    return newUrlObject
 }
 
