@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { decodeUrlController, encodeUrlController, listUrlController, statisticsUrlController } from "../controllers/url-controller";
 import { validateUrlRequestBody } from "../middleware/validatePostUrl";
+import { validateDecodeUrl } from "../middleware/validateDecodeUrl";
 
 const router = Router();
 
@@ -12,7 +13,7 @@ router.get("/statistics/:short_code_id", statisticsUrlController);
 router.post("/encode" , validateUrlRequestBody , encodeUrlController);
 
 //Decoding a url is basically for show the equivalence of a short url
-router.post("/decode",  decodeUrlController);
+router.post("/decode", validateDecodeUrl ,  decodeUrlController);
 
 
 

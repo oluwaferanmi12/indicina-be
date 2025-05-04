@@ -12,8 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUrlController = exports.redirectUrlController = exports.statisticsUrlController = exports.listUrlController = exports.handleRedirect = exports.encodeUrlController = exports.decodeUrlController = void 0;
 const url_service_1 = require("../services/url-service");
 const decodeUrlController = (req, res) => {
-    console.log("Encode the url in the controller");
     // return res.status(200)
+    const { url } = req.body;
+    const result = (0, url_service_1.decodeUrlService)(url);
+    res.status(200).send({ url: result === null || result === void 0 ? void 0 : result.originalUrl });
 };
 exports.decodeUrlController = decodeUrlController;
 const encodeUrlController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,10 +23,10 @@ const encodeUrlController = (req, res) => __awaiter(void 0, void 0, void 0, func
         // Do proper stripping off and validation for the url that is sent 
         const { url } = req.body;
         const codeGenerated = (0, url_service_1.encodeUrlService)(url);
-        res.status(200).json(codeGenerated);
+        res.status(201).json(codeGenerated);
     }
     catch (e) {
-        res.status(500).send();
+        res.status(500).send({ message: "unexpected error" });
     }
 });
 exports.encodeUrlController = encodeUrlController;
@@ -37,7 +39,8 @@ const handleRedirect = (req, res) => {
 };
 exports.handleRedirect = handleRedirect;
 const listUrlController = (req, res) => {
-    console.log("List of urls in the controller");
+    const result = (0, url_service_1.getAllUrls)();
+    res.status(200).send({ data: result });
 };
 exports.listUrlController = listUrlController;
 const statisticsUrlController = (req, res) => {

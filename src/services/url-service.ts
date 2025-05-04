@@ -2,9 +2,11 @@ import { nanoid } from "nanoid"
 import { entriesDB } from "../db/entries-table"
 import moment from "moment";
 import { SHORT_CODE_LENGTH } from "../config/url-config";
+import { extractShortCodeAfterValidate } from "../utils/validate-url";
 
-export const decodeUrlService = () => {
-
+export const decodeUrlService = (url: string) => {
+    const shortCode = extractShortCodeAfterValidate(url)
+    return getOneUrl(shortCode ?? "");
 }
 
 export const encodeUrlService = (url: string) => {
@@ -37,4 +39,11 @@ export const updateUrlVisit =  (short_code: string) => {
     }
 }
 
+export const getAllUrls = () => {
+    const urls = Array.from(entriesDB.entries()).map(([key, value]) => ({
+        short_code: key,
+        ...value
+    }))
+    return urls
+}
 

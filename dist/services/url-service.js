@@ -3,12 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUrlVisit = exports.getOneUrl = exports.encodeUrlService = exports.decodeUrlService = void 0;
+exports.getAllUrls = exports.updateUrlVisit = exports.getOneUrl = exports.encodeUrlService = exports.decodeUrlService = void 0;
 const nanoid_1 = require("nanoid");
 const entries_table_1 = require("../db/entries-table");
 const moment_1 = __importDefault(require("moment"));
 const url_config_1 = require("../config/url-config");
-const decodeUrlService = () => {
+const validate_url_1 = require("../utils/validate-url");
+const decodeUrlService = (url) => {
+    const shortCode = (0, validate_url_1.extractShortCodeAfterValidate)(url);
+    return (0, exports.getOneUrl)(shortCode !== null && shortCode !== void 0 ? shortCode : "");
 };
 exports.decodeUrlService = decodeUrlService;
 const encodeUrlService = (url) => {
@@ -36,3 +39,8 @@ const updateUrlVisit = (short_code) => {
     }
 };
 exports.updateUrlVisit = updateUrlVisit;
+const getAllUrls = () => {
+    const urls = Array.from(entries_table_1.entriesDB.entries()).map(([key, value]) => (Object.assign({ short_code: key }, value)));
+    return urls;
+};
+exports.getAllUrls = getAllUrls;

@@ -7,6 +7,5 @@ export const validateRedirectUrl = (req: Request<RedirectUrlInterface>, res: Res
     if (!short_code || !getOneUrl(short_code)) {
         res.status(404).send({ message: "Url not found" })
     }
-    
     next()
 }
