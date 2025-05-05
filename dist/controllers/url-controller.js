@@ -21,6 +21,7 @@ exports.decodeUrlController = decodeUrlController;
 const encodeUrlController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Do proper stripping off and validation for the url that is sent 
+        console.log(req, "Request for data");
         const { url } = req.body;
         const codeGenerated = (0, url_service_1.encodeUrlService)(url);
         res.status(201).json(codeGenerated);

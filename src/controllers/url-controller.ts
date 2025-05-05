@@ -12,6 +12,7 @@ export const decodeUrlController = (req: Request<{} , {} , EncodeUrlInterface >,
 export const encodeUrlController = async (req: Request<{}, {}, EncodeUrlInterface>, res: Response) => {
     try {
         // Do proper stripping off and validation for the url that is sent 
+        
         const { url } = req.body;
         const codeGenerated = encodeUrlService(url);
         res.status(201).json(codeGenerated);

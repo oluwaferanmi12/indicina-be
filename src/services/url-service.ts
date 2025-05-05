@@ -17,7 +17,8 @@ export const encodeUrlService = (url: string) => {
         visits: 0,
         createdAt: moment.utc(),
         short_url: `${DEFAULT_BASE_URL + generatedCode}`,
-        updatedAt: moment.utc()
+        updatedAt: moment.utc(),
+        shortCode: generatedCode
     }
     entriesDB.set(generatedCode, newUrlObject);
     return newUrlObject
