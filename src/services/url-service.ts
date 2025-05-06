@@ -44,7 +44,7 @@ export const getAllUrls = () => {
     const urls = Array.from(entriesDB.entries()).map(([key, value]) => ({
         short_code: key,
         ...value
-    }))
+    })).reverse()
     return urls
 }
 
