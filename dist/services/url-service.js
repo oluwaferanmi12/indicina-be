@@ -41,7 +41,7 @@ const updateUrlVisit = (short_code) => {
 };
 exports.updateUrlVisit = updateUrlVisit;
 const getAllUrls = () => {
-    const urls = Array.from(entries_table_1.entriesDB.entries()).map(([key, value]) => (Object.assign({ short_code: key }, value)));
+    const urls = Array.from(entries_table_1.entriesDB.entries()).map(([key, value]) => (Object.assign({ short_code: key }, value))).reverse();
     return urls;
 };
 exports.getAllUrls = getAllUrls;
